@@ -1,72 +1,45 @@
+# This Function is used to read the raw Data from the Folder; 
+# The scan Data is stored within a Folder & the Path of this folder is given as input.
+
 import os
-import math
-import seaborn as sns
 import numpy as np
 import pandas as pd
-
-import matplotlib.pyplot as plt 
-from matplotlib.pyplot import figure
-
-# Presets for Plots 
-sns.set(style="darkgrid")
-import matplotlib as mpl
-mpl.rcParams['figure.dpi'] = 100
-
-import cv2
-from skimage.io import imread, imshow
-from skimage.color import rgb2hsv, rgb2gray, rgb2yuv
-from skimage import color, exposure, transform
-from skimage.exposure import equalize_hist
-
-from sklearn.cluster import KMeans
-
-
-
-
-
-
-
-# This Function is used to read the Data from the Folder Path; where the Image Data is stored. Since there are multiple
-# files to be read, hence the Path is chosen. 
-
-
-def reader(FILE_PATH):
+ 
+def reader(FILE_PATH): # Input is given as the Path of the Folder Where all Data is stored. 
     
     # Change Directory of the Kernel
     os.chdir(FILE_PATH) #os.getcwd()
     
-
-    file_paths = [] # To Store Paths of each file within the Folder  
-    
-    
-    for file in os.listdir(): # Check if all files are TXT or not. Read only TXT files
+    # Storing the Path of each file within the Folder
+    file_paths = []    
+        
+    # Checking if all files are TXT or not, Read only TXT files
+    for file in os.listdir(): 
         if file.endswith(".txt"):
-            file_paths.append(f"{FILE_PATH}\{file}")
-    
-    
-    a = {}  # A Dictionary to store the Paths with a ID Number
+            file_paths.append(f"{FILE_PATH}\{file}")   
+
+    # A Dictionary to store the Path of each File with an ID Number (assigned from 0 - max)
+    a = {}  
     k = 0
     for ele in file_paths:
         a[k] = ele
         k+=1
     
-        
-    b = {}   # A Dictionary to store the Data Stored from the Files
+    # A Dictionary to store the DATA
+    b = {}   
     for i in range(len(a)):
-        b[i] = pd.read_csv(a[i], delimiter = "\t", header = None)
+        b[i] = pd.read_csv(a[i], delimiter = "\t", header = None) # Delimiter can be added as a feature or manually changed when required.
     
+    # Taking the Dimension of the first file. (It is assumed that the Files will have same shape- has to be modded) # What happens if Data of Different Dimensions are give...? Something to be done in the future.
+    D1, D2 = b[0].shape 
     
-    D1, D2 = b[0].shape # Takes the Dimension of the first file. (It is assumed that the Files will have same shape for now)
-    
-    X = np.random.rand(len(b), D1*D2) # What happens if Data of Different Dimensions are give...? Something to be done in the future.
-    
-    # Creating the numpy format of the data to be fed into the Clustering Algorithm
-    
+    # Creating a variable suitable for input to the Clustering Algorithm 
+    X = np.random.rand(len(b), D1*D2) # (Number of elements, Dimension in 1D)
     for j in range(len(X)):
         X[j] = b[j].to_numpy().reshape(1,-1)
     
-    del a#, b 
+    #Deletion to free up space
+    del a
     
-    # returns the RESHAPED Data to be fed to the Clustering Algorithm & the original Data within the File for reference 
-    
-    return X,b
+    # returns the RESHAPED Data to be fed to the Clustering Algorithm & the Original Data for reference 
+    return X, b
