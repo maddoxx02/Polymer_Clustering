@@ -1,49 +1,34 @@
-import os
-import math
-import seaborn as sns
-import numpy as np
-import pandas as pd
-
-import matplotlib.pyplot as plt 
-from matplotlib.pyplot import figure
-
-# Presets for Plots 
-sns.set(style="darkgrid")
-import matplotlib as mpl
-mpl.rcParams['figure.dpi'] = 100
-
-import cv2
-from skimage.io import imread, imshow
-from skimage.color import rgb2hsv, rgb2gray, rgb2yuv
-from skimage import color, exposure, transform
-from skimage.exposure import equalize_hist
+# This function performs Clustering on the Data; 
 
 from sklearn.cluster import KMeans
 
+def K_MEANS(input_data, cluster):   # The Function requires input Data in the format of (Data, Number of Clusters) 
+    # Note: the Data should be read from Datareader or should be converted to the format of (Number of elements, Dimension in 1D) as an array. e.g. If there are 20 files of data with dimensions of 256*256, the Input should be given in theform of 20 files with 1Dimension of 65,536
 
-
-
-def K_MEANS(input_data, cluster):
-    
+    # K_Means algorithm
     Kmean = KMeans(n_clusters = cluster)#, n_init = 100)
     
+    # Fitting It to the Data
     Kmean.fit(input_data)
     
-    #return Kmean.labels_, cluster
-
+    # A Dictionary to Store the Cluster IDs & the Respective Data with IDs
     kk = {}
     temp = []
 
+    # Creating the Key for the number of Clusters as mentioned
     for k in range(cluster):
         kk[k] = []
 
+    # Stores the Cluster ID's for Reference & Assignment 
     tt = list(kk.keys())
 
+    # Assigning Data elements to their respective Clusters 
     for t in range(len(tt)):
         for i in range(len(Kmean.labels_)):
-            if Kmean.labels_[i] == tt[t]:            #print("for cluster ", t, " elements are =", i)
+            if Kmean.labels_[i] == tt[t]:
                 kk[t]+=[i]
 
+    # Returning a Dictionary with The Number of Clusters and respective Elements within
     return kk
 
     
