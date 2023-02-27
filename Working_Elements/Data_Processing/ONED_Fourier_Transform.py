@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from statistics import mean
 from numpy.fft import rfft
 import cmath as cmath
@@ -50,3 +51,22 @@ def mag_maker(Input):
         rows_l.append(mean(logged_rows[i]))
         
     return cols_l, rows_l
+
+
+
+def Process(inn):
+
+    trial = mag_maker(inn[0])
+
+    cols = np.random.rand(len(inn), len(trial[0]))
+    rows = np.random.rand(len(inn), len(trial[0]))
+
+    for i in range(len(inn)):
+        cols[i] = mag_maker(inn[i][0])
+        rows[i] = mag_maker(inn[i][1])
+
+    return cols, rows
+
+        
+
+        
