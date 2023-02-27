@@ -1,4 +1,4 @@
 # Polymer Clustering
 AFM Lib testing
 
-![Pipeline](ETC/Compressed_Pipeline_27022023.png)
+![Pipeline for now](ETC/Compressed_Pipeline_27022023.png)
