@@ -2,6 +2,9 @@
 
 from sklearn.cluster import KMeans
 
+# have to make A bigger selection menu for types of data Input: 
+# 1. 
+
 def K_MEANS(input_data, cluster):   # The Function requires input Data in the format of (Data, Number of Clusters) 
     # Note: the Data should be read from Datareader or should be converted to the format of (Number of elements, Dimension in 1D) as an array. e.g. If there are 20 files of data with dimensions of 256*256, the Input should be given in theform of 20 files with 1Dimension of 65,536
 
