@@ -62,9 +62,8 @@ def Process(inn):
     rows = np.random.rand(len(inn), len(trial[0]))
 
     for i in range(len(inn)):
-        cols[i] = mag_maker(inn[i][0])
-        rows[i] = mag_maker(inn[i][1])
-
+        cols[i], rows[i] = mag_maker(inn[i])
+        
     return cols, rows
 
         
