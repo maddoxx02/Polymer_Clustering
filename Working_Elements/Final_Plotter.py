@@ -35,6 +35,6 @@ def plotter(data, original):
             
             plt.imshow(original[data[i][j]], aspect = "equal", cmap = "gray")
             plt.axis('off')
-            plt.title("Sample Number = "+str(data[i][j]))
+            plt.title("Sample Number = "+str((data[i][j])+1))
         
         plt.tight_layout()

@@ -16,8 +16,8 @@ mpl.rcParams['figure.dpi'] = 100
 
 def plotter(original):
           
-    rows = 4 #has to be modded
-    columns = 5
+    rows = 7 #has to be modded
+    columns = 7
     fig = plt.figure(figsize=(12, 10), dpi = 100) # Size & DPI of Plot
     
     # Generation of Samples plots
