@@ -4,7 +4,7 @@ from statistics import mean
 from numpy.fft import rfft
 import cmath as cmath
 
-
+# one-dimensional discrete Fourier Transform 
 
 def logger(INPUT):
     
@@ -68,4 +68,4 @@ def Process(inn):
 
         
 
-        
+# This function returns the fourier transform of the sample categorized by Columns & rows in 1Dimensional arrays
